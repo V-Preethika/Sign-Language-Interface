@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Recognition</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    
+    body {
+        background-size: cover; 
+        background-repeat: no-repeat;
+        color: black;
+    }
+    
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+    }
+    
+    button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    
+    </style>
+</head>
+<body style="background-image: url('/static/background.png');">
+    <h1>Sign Language Recognition</h1>
+    
+    <button id="captureA">Capture Images</button>
+    <button id="createDataset">Create Dataset</button>
+    <button id="trainClassifier">Train Classifier</button>
+    <button id="runInference">Run Inference</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#captureA').click(function() {
+                $.post('/capture/A', function(response) {
+                    alert(response.message);
+                }).fail(function(xhr) {
+                    alert(xhr.responseJSON.error);
+                });
+            });
+
+            $('#createDataset').click(function() {
+                $.post('/create_dataset', function(response) {
+                    alert(response.message);
+                });
+            });
+
+            $('#trainClassifier').click(function() {
+                $.post('/train_classifier', function(response) {
+                    alert(response.message);
+                });
+            });
+
+            $('#runInference').click(function() {
+                $.post('/run_inference', function(response) {
+                    alert(response.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
